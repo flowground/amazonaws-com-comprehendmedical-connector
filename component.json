@@ -1,0 +1,74 @@
+{
+    "title": "AWS Comprehend Medical",
+    "description": " Comprehend Medical extracts structured information from unstructured clinical text. Use these actions to gain insight in your documents. ",
+    "docsUrl": "https://aws.amazon.com/comprehendmedical/",
+    "url": "https://api.apis.guru/v2/specs/amazonaws.com/comprehendmedical/2018-10-30/swagger.json",
+    "envVars": {},
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://comprehendmedical.amazonaws.com/",
+                    "http://comprehendmedical.amazonaws.com/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "hmac": {
+                "label": "Authorization (hmac)",
+                "viewClass": "TextFieldView",
+                "note": "Amazon Signature authorization v4"
+            }
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "DetectEntities": {
+            "main": "./lib/actions/DetectEntities.js",
+            "title": " Inspects the clinical text for a variety of medical entities and returns specific information about them such as entity category, location, and confidence score on that information .",
+            "description": " Inspects the clinical text for a variety of medical entities and returns specific information about them such as entity category, location, and confidence score on that information .",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DetectEntities.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "DetectPHI": {
+            "main": "./lib/actions/DetectPHI.js",
+            "title": " Inspects the clinical text for personal health information (PHI) entities and entity category, location, and confidence score on that information.",
+            "description": " Inspects the clinical text for personal health information (PHI) entities and entity category, location, and confidence score on that information.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/DetectPHI.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}
